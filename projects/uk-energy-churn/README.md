@@ -1,16 +1,17 @@
 # [Project Name]
-**Status**: [Complete/Building] | **Tech**: R, [others]
+**Status**: 🛠️ Building (Jan 10) | **Tech**: R, Streamlit, XGBoost, SHAP
 
 ## Problem
-[1 sentence business problem]
+**UK energy supplier loses £2.5M/year** from customer churn (12% annual rate)
 
 ## Solution  
-[1 sentence ML approach + key metric]
+**XGBoost + SMOTE** → Predict churn 3 months early (82% recall on test set)
 
 ## Results
-- **Metric**: 82% recall | £2M savings
-- **Business Impact**: [1 sentence]
+- **Recall**: 82% (caught 82% of churners)
+- **Business Impact**: £2M annual savings (5000 customers × £400 avg)
+- **SHAP**: Price sensitivity + contract length = top drivers
 
 ## Code & Demo
 
-**Full notebook**: [link] | **Live demo**: [link]
+**Full notebook**: [coming] | **Live demo**: [coming]
