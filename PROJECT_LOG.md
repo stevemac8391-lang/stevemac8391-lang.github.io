@@ -2,7 +2,7 @@
 **Steve Mathew | Day 0: Dec 13, 2025**
 
 ## Week 1 (Dec 13-19): Data + EDA
-- [ ] Portfolio live ✅
+- ✅  Portfolio live (flagship + 2 minis)
 - [ ] UK Energy dataset (100k customers)
 - [ ] EDA + churn drivers (SHAP preview)
 - [ ] Feature engineering (50+ features)
