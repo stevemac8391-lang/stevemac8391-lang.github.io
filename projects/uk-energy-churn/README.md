@@ -1,4 +1,4 @@
-# [Project Name]
+# UK Energy Churn Prediction
 **Status**: 🛠️ Building (Jan 10) | **Tech**: R, Streamlit, XGBoost, SHAP
 
 ## Problem
