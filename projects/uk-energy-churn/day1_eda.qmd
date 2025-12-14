@@ -1,0 +1,226 @@
+---
+title: "day1_eda"
+format: html
+---
+
+```{r setup, include=FALSE, message=TRUE, warning=TRUE}
+
+# Set options
+options(dplyr.summarise.inform = FALSE)
+knitr::opts_chunk$set(fig.width = 12, 
+                      fig.height =  8,
+                      include = TRUE,
+                      echo = TRUE)
+
+# Load the necessary packages
+library(tidyverse)
+library(dplyr)
+library(here)
+```
+
+
+```{r read_data, message=FALSE, warning=FALSE}
+churn <- read_csv(here('data/raw', 'Churn_Modelling.csv'))
+head(churn)
+```
+```{r}
+nrow(churn)
+ncol(churn)
+glimpse(churn)
+colSums(is.na(churn))
+summary(churn)
+```
+## Churn Rate: `r round(mean(churn$Exited)*100,1)`%
+```{r}
+churn_rate <- churn|>
+  count(Exited) |>
+  mutate(pct = n/sum(n)*100)
+
+churn_rate
+```
+## ~80% of the people are happy and have stayed for this period.
+```{r}
+
+ggplot(churn, aes(x = Geography, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by geography",
+    x = "Country",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+```
+### Germany has the maximum churned share of customers close to 30% , both France and Spain have closely equal share of customer who have churned (~15%).
+
+```{r}
+
+ggplot(churn, aes(x = Tenure, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Tenure",
+    x = "Tenure",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+```
+## we see a uniform share of customers through all the tenure period, which mean customers remain loyal irrespective of whether being new or old(~18 to 22%).
+
+```{r}
+
+ggplot(churn, aes(x = Gender, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Gender",
+    x = "Gender",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+## Female customer has churned more than male, with 25% for female and ~ 18% for male customers.
+
+```{r}
+
+ggplot(churn, aes(x = NumOfProducts, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Number of Products owned",
+    x = "Number of Products owned ",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+## People with 3 and 4 products have churned most, with 4 product being 100 %. Its a huge driver for customer exiting.
+
+
+```{r}
+
+ggplot(churn, aes(x = IsActiveMember, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Engaement",
+    x = "Engagement",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+## People who are not acitve have churned more than people who are acitve.
+
+
+```{r}
+
+ggplot(churn, aes(x = Age, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Age",
+    x = "Age",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+## it seems to normal distributed, with mean close 50-55 yrs, which means people close to 50 to 55 yrs has churned most. it seems to have a outlier at ~80yrs, maybe due to people's death.
+```{r}
+churn_df <- churn|>
+  mutate(credit_bin = cut(CreditScore, breaks=seq(300,850,50)))
+
+ggplot(churn_df, aes(x = credit_bin, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Credit score",
+    x = "Credit score",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+```
+### When the customers credit score is less than 400, their churning rate is very high close to 100% percent. the chruning rate decrease gradually as the credit score increases.
+
+
+```{r}
+churn_df <- churn|>
+  mutate(salary_bin = ceiling(EstimatedSalary/10000)*10000)
+
+ggplot(churn_df, aes(x = salary_bin, fill = factor(Exited))) +
+  geom_bar(position = "fill") +
+  scale_fill_discrete(
+    name   = "Customer status",
+    labels = c("0" = "Stayed", "1" = "Churned")
+  ) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+  labs(
+    title = "Churn rate by Salary range",
+    x = "salary range",
+    y = "Share of customers"
+  ) +
+  theme_minimal(base_size = 14)
+```
+## we see a uniform share of customers through all the Salary range, which mean customers remain loyal irrespective of their salary(~20 to 25%).
+
+```{r}
+library(corrplot)
+library(RColorBrewer)
+
+# Select numeric vars for correlation
+num_vars <- churn %>% 
+  select(Age, Tenure, Balance, NumOfProducts, EstimatedSalary, Exited) %>%
+  cor(use = "complete.obs")
+
+# Heatmap
+corrplot(num_vars, 
+         method = "color", 
+         type = "upper", 
+         order = "hclust",
+         tl.cex = 0.9, 
+         tl.col = "black",
+         col = brewer.pal(n = 8, name = "RdYlBu"),
+         title = "Correlation Heatmap: Numeric Variables vs Churn",
+         mar = c(0,0,2,0))
+
+```
+
+### “hypotheses for modeling” summary:<br>
+   - Higher churn in Germany.<br>
+   - Higher churn in females and mid‑age customers.<br>
+   - Very high churn when credit score < 400.<br>
+   - Very high churn when people have more than 3 products.<br>
+   - Higher churn in people who are not acitve.<br>
+   - Tenure and salary look relatively flat vs churn.<br>
+   - no serious multicollinearity problem among these numeric features, and only a weak-to-moderate relationship between the predictors and churn
+
