@@ -12,9 +12,10 @@ Steve Mathew | Day 0: Dec 13, 2025
 
 ## Week 2 (Dec 20–26): Modeling + Features
 
-- [ ] Logistic baseline + tree model (XGBoost or Random Forest)  
-- [ ] Metric focus: high recall on churners with reasonable precision  
-- [ ] Compare models and pick “champion” for app + SHAP  
+- [x] Logistic baseline + tree model (XGBoost or Random Forest)  
+- [x] Metric focus: high recall on churners with reasonable precision  
+- [x] Compare models and pick “champion” for app + SHAP
+      - Champion model: ranger Random Forest, class.weights = c("0"=1,"1"=4), mtry = 3, num.trees = 300, threshold = 0.3 (recall ≈ 0.65, precision ≈ 0.59).
 - [ ] Week 2 reveal.js deck: `slides/week2_models.html`  
 
 ## Week 3 (Dec 27–Jan 2): Streamlit + SHAP
