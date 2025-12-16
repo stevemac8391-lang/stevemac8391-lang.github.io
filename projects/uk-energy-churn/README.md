@@ -13,16 +13,24 @@ I implement supervised learning models to predict if a customer will churn, usin
 
 ### Analysis
 
-**Churn and Tenure Relationship:**  
+**Churn and Tenure Relationship:** 
+![Churn vs tenure](plots/churn_tenure.png)
 Tenure shows a relatively flat relationship with churn in this dataset, so it is not a strong driver on its own.
 
 **Churn and Gender:**  
+![Churn vs credit score](plots/churn_gender.png)
 Gender shows a clear effect in the logistic model: the `GenderMale` coefficient is strongly negative and highly significant, indicating male customers are less likely to churn than female customers, after controlling for other features. 
 
 **Churn and Credit Score:**  
+![Churn vs credit score](plots/churn_credit_score.png)
 Credit score has a clearer relationship with churn; lower scores are more associated with churn than higher scores, and it appears as a more important predictor than tenure in the models.
 
 **Churn and Geography / Age / Activity:**  
+![Churn vs credit score](plots/churn_ geography.png)
+
+![Churn vs credit score](plots/churn_age.png)
+
+![Churn vs credit score](plots/churn_engagementt.png)
 Geography, age and active membership status are strong churn drivers identified in the baseline logistic model.
 
 ## Models
