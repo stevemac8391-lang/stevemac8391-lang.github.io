@@ -25,13 +25,17 @@ Gender shows a clear effect in the logistic model: the `GenderMale` coefficient 
 ![Churn vs credit score](plots/churn_credit_score.png)
 Credit score has a clearer relationship with churn; lower scores are more associated with churn than higher scores, and it appears as a more important predictor than tenure in the models.
 
-**Churn and Geography / Age / Activity:**  
+**Churn and Geography:**  
 ![Churn vs credit score](plots/churn_geography.png)
+Churn is noticeably higher in Germany than in France and Spain, making German customers a key risk segment. 
 
+**Churn and Age:**  
 ![Churn vs credit score](plots/churn_age.png)
+Age is roughly normally distributed around middle age (about 50–55) and does not show an extreme churn spike at any single age band.
 
+**Churn and Activity:**  
 ![Churn vs credit score](plots/churn_engagement.png)
-Geography, age and active membership status are strong churn drivers identified in the baseline logistic model.
+Inactive customers churn far more than active ones, confirming that engagement is a strong protective factor.
 
 ## Models
 
