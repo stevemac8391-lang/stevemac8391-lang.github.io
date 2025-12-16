@@ -39,7 +39,7 @@ The data is split into 80% train and 20% test. A logistic regression baseline is
 
 | Model                          | Threshold | Accuracy | Recall (churn) | Precision (churn) | Note          |
 |--------------------------------|-----------|----------|----------------|-------------------|---------------|
-| Logistic regression            | 0.5       | ~82–86   | ~21            | ~67               | Baseline      |
+| Logistic regression            | 0.5       | ~82      | ~21            | ~67               | Baseline      |
 | Logistic regression            | 0.3       | ~79      | ~49            | ~47               | More recall   |
 | Random Forest                  | 0.3       | ~83      | ~66            | ~57               | Better trade‑off|
 | Weighted Random Forest (champ) | 0.3       | ~84      | ~65            | ~59               | Chosen model  |
