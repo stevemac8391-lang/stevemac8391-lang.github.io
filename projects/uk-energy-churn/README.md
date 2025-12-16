@@ -26,11 +26,11 @@ Gender shows a clear effect in the logistic model: the `GenderMale` coefficient 
 Credit score has a clearer relationship with churn; lower scores are more associated with churn than higher scores, and it appears as a more important predictor than tenure in the models.
 
 **Churn and Geography / Age / Activity:**  
-![Churn vs credit score](plots/churn_ geography.png)
+![Churn vs credit score](plots/churn_geography.png)
 
 ![Churn vs credit score](plots/churn_age.png)
 
-![Churn vs credit score](plots/churn_engagementt.png)
+![Churn vs credit score](plots/churn_engagement.png)
 Geography, age and active membership status are strong churn drivers identified in the baseline logistic model.
 
 ## Models
